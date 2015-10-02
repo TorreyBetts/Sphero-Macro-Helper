@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>SpheroMacroHelper Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">Sphero Macro Helper </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Torrey Betts</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/calibrateUsingMacro:heading:delay:">+ calibrateUsingMacro:heading:delay:</option>
+		
+		<option value="//api/name/delayUsingMacro:delay:">+ delayUsingMacro:delay:</option>
+		
+		<option value="//api/name/ledBackChangeUsingMacro:color:intensity:delay:">+ ledBackChangeUsingMacro:color:intensity:delay:</option>
+		
+		<option value="//api/name/ledChangeUsingMacro:color:fadeInto:delay:">+ ledChangeUsingMacro:color:fadeInto:delay:</option>
+		
+		<option value="//api/name/performCommandsUsingRobot:timesToRepeat:autoplay:commands:completion:">+ performCommandsUsingRobot:timesToRepeat:autoplay:commands:completion:</option>
+		
+		<option value="//api/name/rollUsingMacro:speed:heading:delay:">+ rollUsingMacro:speed:heading:delay:</option>
+		
+		<option value="//api/name/rotateUsingMacro:rotation:delay:">+ rotateUsingMacro:rotation:delay:</option>
+		
+		<option value="//api/name/stabilizationUsingMacro:setting:delay:">+ stabilizationUsingMacro:setting:delay:</option>
+		
+		<option value="//api/name/stopUsingMacro:delay:">+ stopUsingMacro:delay:</option>
+		
+	</optgroup>
+	
+
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">SpheroMacroHelper Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>SpheroMacroHelper.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The SpheroMacroHelper class was created to simplify the use of macros that are provided by the Sphero SDK.</p>
+
+<p>When using the Sphero SDK macro classes require several lines of code to define the macro for execution.</p>
+
+<pre><code>RKMacroObject *macro = [RKMacroObject new];
+[macro addCommand:[RKMCLoopFor commandWithRepeats:2]];
+[SpheroMacroHelper rotateUsingMacro:macro rotation:180 delay:500];
+[macro addCommand:[RKMCDelay commandWithDelay:500]];
+[macro addCommand:[RKMCLoopEnd command]];
+RKMacroPlayer *player = [[RKMacroPlayer alloc] initWithRobot:_robot.robot];
+[player play:macro];
+</code></pre>
+
+<p>To simplify macro creation and give it a more iOS feel like when working with UIView animations, macro commands are added into a command block and are executed first with an option to repeat after completion. Once commands are executed a second set of commands can also be executed.</p>
+
+<pre><code>[SpheroMacroHelper performCommandsUsingRobot:_robot timesToRepeat:1 autoplay:YES commands:^(RKMacroObject *macro)
+{
+    [SpheroMacroHelper rotateUsingMacro:macro rotation:180 delay:500];
+} completion:nil];
+</code></pre>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/performCommandsUsingRobot:timesToRepeat:autoplay:commands:completion:" title="performCommandsUsingRobot:timesToRepeat:autoplay:commands:completion:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/performCommandsUsingRobot:timesToRepeat:autoplay:commands:completion:">+&nbsp;performCommandsUsingRobot:timesToRepeat:autoplay:commands:completion:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Perform a sequence of macro commands and an optional completion sequence of macro commands.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (RKMacroObject *)performCommandsUsingRobot:(RKConvenienceRobot *)<em>robot</em> timesToRepeat:(uint8_t)<em>timesToRepeat</em> autoplay:(BOOL)<em>autoplay</em> commands:(void ( ^ ) ( RKMacroObject *macro ))<em>commands</em> completion:(void ( ^ ) ( RKMacroObject *macro ))<em>completion</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>robot</code></th>
+						<td><p>The connected robot instance that the macro commands will be executed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>timesToRepeat</code></th>
+						<td><p>Number of times to repeat the commands within the commands block.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>autoplay</code></th>
+						<td><p>Automatically start the sequence of macro commands within the commands and completion blocks.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>commands</code></th>
+						<td><p>Block of macro commands.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completion</code></th>
+						<td><p>Block of macro commands that execute after the commands block completes.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The RKMacroObject instance that was created</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SpheroMacroHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/calibrateUsingMacro:heading:delay:" title="calibrateUsingMacro:heading:delay:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/calibrateUsingMacro:heading:delay:">+&nbsp;calibrateUsingMacro:heading:delay:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Macro command to calibrate the robot by setting it&rsquo;s heading direction</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)calibrateUsingMacro:(RKMacroObject *)<em>macro</em> heading:(int)<em>heading</em> delay:(int)<em>delay</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>macro</code></th>
+						<td><p>The connected robot instance that the macro commands will be executed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>heading</code></th>
+						<td><p>The heading direction the robot will be calibrated to. Valid values are 0-359.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delay</code></th>
+						<td><p>The delay in milliseconds after this command to execute the next command. Valid values are 0-255.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SpheroMacroHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/delayUsingMacro:delay:" title="delayUsingMacro:delay:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delayUsingMacro:delay:">+&nbsp;delayUsingMacro:delay:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Macro command to add a delay between other macro commands. This macro allows for the delay to exceed the 255 millisecond delay limit.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)delayUsingMacro:(RKMacroObject *)<em>macro</em> delay:(int)<em>delay</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>macro</code></th>
+						<td><p>The connected robot instance that the macro commands will be executed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delay</code></th>
+						<td><p>The delay in milliseconds after this command to execute the next command. Valid values are 0-65535.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SpheroMacroHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/ledChangeUsingMacro:color:fadeInto:delay:" title="ledChangeUsingMacro:color:fadeInto:delay:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/ledChangeUsingMacro:color:fadeInto:delay:">+&nbsp;ledChangeUsingMacro:color:fadeInto:delay:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Macro command to fade the LED in the robot to the specified color.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)ledChangeUsingMacro:(RKMacroObject *)<em>macro</em> color:(UIColor *)<em>color</em> fadeInto:(BOOL)<em>fadeInto</em> delay:(int)<em>delay</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>macro</code></th>
+						<td><p>The connected robot instance that the macro commands will be executed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>color</code></th>
+						<td><p>The color for the LED to change to.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>fadeInto</code></th>
+						<td><p>Specifies if the LED will fade into the newly assigned color.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delay</code></th>
+						<td><p>The delay in milliseconds after this command to execute the next command.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SpheroMacroHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/ledBackChangeUsingMacro:color:intensity:delay:" title="ledBackChangeUsingMacro:color:intensity:delay:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/ledBackChangeUsingMacro:color:intensity:delay:">+&nbsp;ledBackChangeUsingMacro:color:intensity:delay:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Macro command to change the back LED in the robot to the specified color and intensity.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)ledBackChangeUsingMacro:(RKMacroObject *)<em>macro</em> color:(UIColor *)<em>color</em> intensity:(float)<em>intensity</em> delay:(int)<em>delay</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>macro</code></th>
+						<td><p>The connected robot instance that the macro commands will be executed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>color</code></th>
+						<td><p>The color for the LED to change to.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intensity</code></th>
+						<td><p>The intensity the back LED will be lit at. Valid values are 0.0-1.0.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delay</code></th>
+						<td><p>The delay in milliseconds after this command to execute the next command.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SpheroMacroHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/rollUsingMacro:speed:heading:delay:" title="rollUsingMacro:speed:heading:delay:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/rollUsingMacro:speed:heading:delay:">+&nbsp;rollUsingMacro:speed:heading:delay:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Macro command to roll the robot at a given heading direction and speed.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)rollUsingMacro:(RKMacroObject *)<em>macro</em> speed:(float)<em>speed</em> heading:(int)<em>heading</em> delay:(int)<em>delay</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>macro</code></th>
+						<td><p>The connected robot instance that the macro commands will be executed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>speed</code></th>
+						<td><p>The speed at which the robot will roll. Valid values are 0.0-1.0.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>heading</code></th>
+						<td><p>The heading direction the robot will be calibrated to. Valid values are 0-359.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delay</code></th>
+						<td><p>The delay in milliseconds after this command to execute the next command. Valid values are 0-255.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SpheroMacroHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/rotateUsingMacro:rotation:delay:" title="rotateUsingMacro:rotation:delay:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/rotateUsingMacro:rotation:delay:">+&nbsp;rotateUsingMacro:rotation:delay:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Macro command to rotate the robot over a given time.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)rotateUsingMacro:(RKMacroObject *)<em>macro</em> rotation:(short)<em>rotation</em> delay:(int)<em>delay</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>macro</code></th>
+						<td><p>The connected robot instance that the macro commands will be executed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>rotation</code></th>
+						<td><p>The number of degrees the robot should rotate. Valid values are -32767-32767.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delay</code></th>
+						<td><p>The delay in milliseconds after this command to execute the next command. Valid values are 0-65535.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SpheroMacroHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stabilizationUsingMacro:setting:delay:" title="stabilizationUsingMacro:setting:delay:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stabilizationUsingMacro:setting:delay:">+&nbsp;stabilizationUsingMacro:setting:delay:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Macro command to turn robot stabilization on or off.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)stabilizationUsingMacro:(RKMacroObject *)<em>macro</em> setting:(int)<em>setting</em> delay:(int)<em>delay</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>macro</code></th>
+						<td><p>The connected robot instance that the macro commands will be executed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>setting</code></th>
+						<td><p>The stabilization setting. Valid values are 0-1, 0=off and 1=on.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delay</code></th>
+						<td><p>The delay in milliseconds after this command to execute the next command. Valid values are 0-255.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SpheroMacroHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stopUsingMacro:delay:" title="stopUsingMacro:delay:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stopUsingMacro:delay:">+&nbsp;stopUsingMacro:delay:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Macro command to stop the robot without altering its current heading direction.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)stopUsingMacro:(RKMacroObject *)<em>macro</em> delay:(int)<em>delay</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>macro</code></th>
+						<td><p>The connected robot instance that the macro commands will be executed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delay</code></th>
+						<td><p>The delay in milliseconds after this command to execute the next command. Valid values are 0-255.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SpheroMacroHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2015 Torrey Betts. All rights reserved. Updated: 2015-10-02</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
