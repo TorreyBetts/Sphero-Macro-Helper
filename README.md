@@ -8,6 +8,28 @@
 
 Simply copy the source files found in this repository to your Xcode project.
 
+## Usage
+
+Macros from the Sphero iOS SDK worked like the snippet below.
+
+    RKMacroObject *macro = [RKMacroObject new];
+    [macro addCommand:[RKMCLoopFor commandWithRepeats:2]];
+    [macro addCommand:[RKMCRGB commandWithRed:0 green:0 blue:0 delay:250]];
+    [macro addCommand:[RKMCDelay commandWithDelay:250]];
+    [macro addCommand:[RKMCSlew commandWithRed:1 green:0 blue:0 delay:1000]];
+    [macro addCommand:[RKMCDelay commandWithDelay:1000]];
+    [macro addCommand:[RKMCLoopEnd command]];
+    RKMacroPlayer *player = [[RKMacroPlayer alloc] initWithRobot:_robot.robot];
+    [player play:macro];
+    
+With the Sphero Macro Helper, the macro usage has been simplified.
+
+    [SpheroMacroHelper performCommandsUsingRobot:_robot timesToRepeat:5 autoplay:YES commands:^(RKMacroObject *macro)
+    {
+        [SpheroMacroHelper ledFrontChangeUsingMacro:macro color:[UIColor blackColor] fadeInto:NO delay:250];
+        [SpheroMacroHelper ledFrontChangeUsingMacro:macro color:[UIColor redColor] fadeInto:YES delay:1000];
+    } completion:nil];
+
 ## License
 
 The MIT License (MIT)

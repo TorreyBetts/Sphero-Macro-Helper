@@ -69,7 +69,7 @@
     [macro addCommand:[RKMCDelay commandWithDelay:delay]];
 }
 
-+ (void)ledChangeUsingMacro:(RKMacroObject *)macro color:(UIColor *)color fadeInto:(BOOL)fadeInto delay:(int)delay
++ (void)ledFrontChangeUsingMacro:(RKMacroObject *)macro color:(UIColor *)color fadeInto:(BOOL)fadeInto delay:(int)delay
 {
     if (!color)
         return;

@@ -64,7 +64,7 @@ To simplify macro creation and give it a more iOS feel like when working with UI
  */
 + (void)delayUsingMacro:(RKMacroObject *)macro delay:(int)delay;
 
-/** Macro command to fade the LED in the robot to the specified color.
+/** Macro command to fade the front LED in the robot to the specified color.
 
  @param macro The connected robot instance that the macro commands will be executed.
  @param color The color for the LED to change to.
@@ -72,7 +72,7 @@ To simplify macro creation and give it a more iOS feel like when working with UI
  @param delay The delay in milliseconds after this command to execute the next command.
 
  */
-+ (void)ledChangeUsingMacro:(RKMacroObject *)macro color:(UIColor *)color fadeInto:(BOOL)fadeInto delay:(int)delay;
++ (void)ledFrontChangeUsingMacro:(RKMacroObject *)macro color:(UIColor *)color fadeInto:(BOOL)fadeInto delay:(int)delay;
 
 /** Macro command to change the back LED in the robot to the specified color and intensity.
 
